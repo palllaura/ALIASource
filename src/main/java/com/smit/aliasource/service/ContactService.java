@@ -3,6 +3,7 @@ package com.smit.aliasource.service;
 import com.smit.aliasource.dto.ContactDto;
 import com.smit.aliasource.entity.Contact;
 import com.smit.aliasource.repository.ContactRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -74,6 +75,24 @@ public class ContactService {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Delete contact from database.
+     * @param id ID of contact to delete.
+     * @return true if contact was deleted, false if not found or error.
+     */
+    public boolean deleteContactById(Long id) {
+        try {
+            repository.deleteById(id);
+            return true;
+        } catch (EmptyResultDataAccessException e) {
+            LOGGER.warning("Error while deleting contact: contact not found");
+            return false;
+        } catch (Exception e) {
+            LOGGER.warning("Unexpected error while deleting contact: " + e.getMessage());
+            return false;
+        }
     }
 
 

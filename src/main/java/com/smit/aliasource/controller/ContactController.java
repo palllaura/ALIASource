@@ -3,8 +3,11 @@ package com.smit.aliasource.controller;
 import com.smit.aliasource.dto.ContactDto;
 import com.smit.aliasource.entity.Contact;
 import com.smit.aliasource.service.ContactService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +54,20 @@ public class ContactController {
             return ResponseEntity.badRequest().body(Map.of(
                     "message", "Failed to save contact."
             ));
+        }
+    }
+
+    /**
+     * Delete contact by id.
+     * @param id id of contact.
+     * @return response entity with result message.
+     */
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteContact(@PathVariable Long id) {
+        if (service.deleteContactById(id)) {
+            return ResponseEntity.ok(Map.of("message", "Contact deleted successfully!"));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Contact not found."));
         }
     }
 

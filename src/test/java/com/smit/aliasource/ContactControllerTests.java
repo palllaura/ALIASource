@@ -105,4 +105,26 @@ class ContactControllerTests {
 		Assertions.assertEquals(expectedBody, result.getBody());
 	}
 
+	@Test
+	void testDeleteContactSuccess() {
+		Long id = 55L;
+		when(service.deleteContactById(id)).thenReturn(true);
+
+		ResponseEntity<?> result = controller.deleteContact(id);
+
+		Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
+		Assertions.assertEquals(Map.of("message", "Contact deleted successfully!"), result.getBody());
+	}
+
+	@Test
+	void testDeleteContactNotFound() {
+		Long id = 55L;
+		when(service.deleteContactById(id)).thenReturn(false);
+
+		ResponseEntity<?> result = controller.deleteContact(id);
+
+		Assertions.assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
+		Assertions.assertEquals(Map.of("message", "Contact not found."), result.getBody());
+	}
+
 }

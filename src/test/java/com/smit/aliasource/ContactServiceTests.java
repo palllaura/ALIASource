@@ -9,10 +9,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -118,6 +120,22 @@ class ContactServiceTests {
 		Contact newContact = captor.getValue();
 
 		Assertions.assertEquals(":Öö-PÕue$?", newContact.getAlias());
+	}
+
+	@Test
+	void testDeleteContactCorrectTriggersDeleteInRepository() {
+		Long id = 55L;
+		boolean result = service.deleteContactById(id);
+		verify(repository, times(1)).deleteById(id);
+		Assertions.assertTrue(result);
+	}
+
+	@Test
+	void testDeleteContactByIdResultsFalseWhenNotFound() {
+		Long id = 55L;
+		doThrow(new EmptyResultDataAccessException(1)).when(repository).deleteById(id);
+		boolean result = service.deleteContactById(id);
+		Assertions.assertFalse(result);
 	}
 
 
