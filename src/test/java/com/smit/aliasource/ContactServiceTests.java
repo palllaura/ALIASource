@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
@@ -49,7 +50,7 @@ class ContactServiceTests {
 	 * @return dto.
 	 */
 	private ContactDto createTestDto() {
-		dto = new ContactDto("Aliisa", "Sära", "Särin", "53333333");
+		dto = new ContactDto("Karl", "Rebane", "Reps", "544444444");
 		return dto;
 	}
 
@@ -135,6 +136,36 @@ class ContactServiceTests {
 		Long id = 55L;
 		doThrow(new EmptyResultDataAccessException(1)).when(repository).deleteById(id);
 		boolean result = service.deleteContactById(id);
+		Assertions.assertFalse(result);
+	}
+
+	@Test
+	void testEditContactSuccess() {
+		Long id = 55L;
+
+		contact = createTestContact();
+		dto = createTestDto();
+
+		when(repository.findById(id)).thenReturn(Optional.of(contact));
+
+		service.editContact(id, dto);
+
+		ArgumentCaptor<Contact> captor = ArgumentCaptor.forClass(Contact.class);
+		verify(repository).save(captor.capture());
+		Contact newContact = captor.getValue();
+
+		Assertions.assertEquals(dto.getFirstName(), newContact.getFirstName());
+		Assertions.assertEquals(dto.getLastName(), newContact.getLastName());
+		Assertions.assertEquals(dto.getAlias(), newContact.getAlias());
+		Assertions.assertEquals(dto.getPhoneNumber(), newContact.getPhoneNumber());
+	}
+
+	@Test
+	void testEditContactFailsOnInvalidInput() {
+		dto = createTestDto();
+		dto.setPhoneNumber("  ");
+
+		boolean result = service.editContact(55L, dto);
 		Assertions.assertFalse(result);
 	}
 

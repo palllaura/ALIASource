@@ -127,4 +127,28 @@ class ContactControllerTests {
 		Assertions.assertEquals(Map.of("message", "Contact not found."), result.getBody());
 	}
 
+	@Test
+	void testEditContactReturnsOkWhenSuccessful() {
+		Long id = 55L;
+		dto = createTestDto();
+		when(service.editContact(id, dto)).thenReturn(true);
+
+		ResponseEntity<?> response = controller.editContact(id, dto);
+
+		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+		Assertions.assertEquals("Contact edited successfully!", ((Map<?, ?>) response.getBody()).get("message"));
+	}
+
+	@Test
+	void testEditContactReturnsBadRequestWhenUnsuccessful() {
+		Long id = 55L;
+		dto = createTestDto();
+		when(service.editContact(id, dto)).thenReturn(false);
+
+		ResponseEntity<?> response = controller.editContact(id, dto);
+
+		Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+		Assertions.assertEquals("Failed to edit contact.", ((Map<?, ?>) response.getBody()).get("message"));
+	}
+
 }

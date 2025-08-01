@@ -7,6 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
@@ -95,5 +96,37 @@ public class ContactService {
         }
     }
 
+    /**
+     * Edit existing contact.
+     * @param id id of contact.
+     * @param dto dto with contact data.
+     * @return true if was edited, else false.
+     */
+    public boolean editContact(Long id, ContactDto dto) {
+        if (!validateContactDto(dto)) {
+            return false;
+        }
+        Optional<Contact> contactOptional = repository.findById(id);
+        if (contactOptional.isEmpty()) {
+            return false;
+        }
+
+        Contact contact = contactOptional.get();
+
+        contact.setFirstName(dto.getFirstName());
+        contact.setLastName(dto.getLastName());
+        contact.setAlias(dto.getAlias());
+        contact.setPhoneNumber(dto.getPhoneNumber());
+
+        try {
+            repository.save(contact);
+            String message = String.format("Successfully edited contact: %1$s (%2$s) %3$s",
+                    contact.getFirstName(), contact.getLastName(), contact.getAlias());
+            LOGGER.info(message);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 
 }

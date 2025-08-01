@@ -71,5 +71,24 @@ public class ContactController {
         }
     }
 
+    /**
+     * Edit existing contact.
+     * @param id id of contact.
+     * @param input dto with data.
+     * @return response entity with result message.
+     */
+    @PostMapping("/edit/{id}")
+    public ResponseEntity<?> editContact(@PathVariable Long id, @RequestBody ContactDto input) {
+        if (service.editContact(id, input)) {
+            return ResponseEntity.ok(Map.of(
+                    "message", "Contact edited successfully!"
+            ));
+        } else {
+            return ResponseEntity.badRequest().body(Map.of(
+                    "message", "Failed to edit contact."
+            ));
+        }
+    }
+
 
 }
