@@ -60,5 +60,5 @@ ALIASource is a minimal Spring Boot application for managing secret contact reco
    ```bash
    npm run dev
 4. The frontend will be available at:
-   http://localhost:5173
+   http://localhost:4200/
 
