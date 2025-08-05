@@ -58,7 +58,12 @@ ALIASource is a minimal Spring Boot application for managing secret contact reco
    npm install
 3. Start the development server:
    ```bash
-   npm run dev
+   ng serve
 4. The frontend will be available at:
    http://localhost:4200/
+
+<img width="918" height="564" alt="Screenshot 2025-08-05 at 18 01 34" src="https://github.com/user-attachments/assets/c1912920-d35d-4d8a-9ec8-c23416d06f53" />
+
+<img width="913" height="563" alt="Screenshot 2025-08-05 at 18 03 39" src="https://github.com/user-attachments/assets/cf0ab7db-4a60-4369-849b-8ab4f6d8665d" />
+
 
