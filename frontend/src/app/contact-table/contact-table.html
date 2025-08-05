@@ -2,23 +2,23 @@
   <table class="table">
     <thead>
     <tr>
-      <th>id</th>
-      <th>eesnimi</th>
-      <th>perekonnanimi</th>
-      <th>alias</th>
-      <th>telefoninumber</th>
+      <th>Id</th>
+      <th>Eesnimi</th>
+      <th>Perekonnanimi</th>
+      <th>Alias</th>
+      <th>Telefoninumber</th>
       <th> </th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>1</td>
-      <td>Jaan</td>
-      <td>Tamm</td>
-      <td>Jants</td>
-      <td>51234567</td>
+    <tr *ngFor="let contact of contacts">
+      <td>{{ contact.id }}</td>
+      <td>{{ contact.firstName }}</td>
+      <td>{{ contact.lastName }}</td>
+      <td>{{ contact.alias }}</td>
+      <td>{{ contact.phoneNumber }}</td>
       <td>
-        <button>muuda / kustuta</button>
+        <button>Muuda / Kustuta</button>
       </td>
     </tr>
     </tbody>
