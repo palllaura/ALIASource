@@ -1,2 +1,2 @@
-<app-navbar></app-navbar>
-<app-contact-table></app-contact-table>
+<app-navbar (searchTermChanged)="onSearch($event)"></app-navbar>
+<app-contact-table [searchTerm]="searchTerm"></app-contact-table>

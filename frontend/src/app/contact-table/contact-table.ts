@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Contact } from '../model/contact';
 import { ContactService } from '../services/contact.service';
 import {CommonModule} from '@angular/common';
@@ -13,13 +13,31 @@ import {CommonModule} from '@angular/common';
 export class ContactTable implements OnInit {
 
   contacts: Contact[] = [];
+  filteredContacts: Contact[] = [];
+
+  @Input() searchTerm: string = '';
 
   constructor(private contactService: ContactService) {}
 
   ngOnInit(): void {
     this.contactService.getAllContacts().subscribe((data) => {
       this.contacts = data;
+      this.filterContacts();
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['searchTerm']) {
+      this.filterContacts();
+    }
+  }
+
+  filterContacts() {
+    this.filteredContacts = this.contacts.filter(contact =>
+      contact.firstName.toLowerCase().includes(this.searchTerm) ||
+      contact.lastName.toLowerCase().includes(this.searchTerm) ||
+      contact.alias.toLowerCase().includes(this.searchTerm)
+    );
   }
 
   sortField: string = '';
