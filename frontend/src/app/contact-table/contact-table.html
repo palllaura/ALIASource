@@ -3,9 +3,18 @@
     <thead>
     <tr>
       <th>Id</th>
-      <th>Eesnimi</th>
-      <th>Perekonnanimi</th>
-      <th>Alias</th>
+      <th (click)="sortBy('firstName')">
+        Eesnimi
+        <img src="sorting-icon.png" height="12px"/>
+      </th>
+      <th (click)="sortBy('lastName')">
+        Perekonnanimi
+        <img src="sorting-icon.png" height="12px"/>
+      </th>
+      <th (click)="sortBy('alias')">
+        Alias
+        <img src="sorting-icon.png" height="12px"/>
+      </th>
       <th>Telefoninumber</th>
       <th> </th>
     </tr>

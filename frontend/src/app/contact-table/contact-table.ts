@@ -21,4 +21,27 @@ export class ContactTable implements OnInit {
       this.contacts = data;
     });
   }
+
+  sortField: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
+
+  sortBy(field: string): void {
+    if (this.sortField === field) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortField = field;
+      this.sortDirection = 'asc';
+    }
+
+    this.contacts.sort((a: Contact, b: Contact) => {
+      const valueA = (a as any)[field]?.toLowerCase() || '';
+      const valueB = (b as any)[field]?.toLowerCase() || '';
+
+      if (valueA < valueB) return this.sortDirection === 'asc' ? -1 : 1;
+      if (valueA > valueB) return this.sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+
 }
