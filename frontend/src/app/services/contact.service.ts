@@ -21,4 +21,8 @@ export class ContactService {
     return this.http.post(this.apiUrl + 'add', dto);
   }
 
+  deleteContact(id: number) {
+    return this.http.delete(`${this.apiUrl}delete/${id}`);
+  }
+
 }

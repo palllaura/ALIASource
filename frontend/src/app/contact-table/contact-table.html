@@ -27,7 +27,7 @@
       <td>{{ contact.alias }}</td>
       <td>{{ contact.phoneNumber }}</td>
       <td>
-        <button>Muuda / Kustuta</button>
+        <button (click)="deleteContact(contact.id)">Kustuta</button>
       </td>
     </tr>
     </tbody>

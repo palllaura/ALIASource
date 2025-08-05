@@ -71,5 +71,20 @@ export class ContactTable implements OnInit {
     });
   }
 
+  deleteContact(id: number) {
+    const confirmed = confirm('Kas oled kindel, et soovid kontakti kustutada?');
+    if (!confirmed) return;
+
+    this.contactService.deleteContact(id).subscribe({
+      next: () => {
+        this.loadContacts();
+      },
+      error: (err) => {
+        alert('Kustutamine ebaõnnestus');
+        console.error('Delete failed', err);
+      }
+    });
+  }
+
 
 }
