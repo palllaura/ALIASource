@@ -1,0 +1,24 @@
+.table {
+  font-size: 0.875rem;
+  text-align: left;
+  background: white;
+  color: #0069e0;
+  width: 100%;
+}
+
+.table th,
+.table td {
+  padding: 0.5rem 1rem;
+}
+
+.table thead {
+  background-color: #0095e9;
+  color: white;
+}
+
+.table button {
+  background: #0069e0;
+  color: white;
+}
+
+
