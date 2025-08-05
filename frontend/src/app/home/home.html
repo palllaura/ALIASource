@@ -1,2 +1,7 @@
-<app-navbar (searchTermChanged)="onSearch($event)"></app-navbar>
+<app-navbar (addClicked)="openAddModal()" (searchTermChanged)="onSearch($event)"></app-navbar>
 <app-contact-table [searchTerm]="searchTerm"></app-contact-table>
+<app-add-contact-modal
+  [visible]="modalVisible"
+  (contactAdded)="onContactAdded()"
+  (closed)="closeAddModal()"
+></app-add-contact-modal>

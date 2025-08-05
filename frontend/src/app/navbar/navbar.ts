@@ -10,12 +10,17 @@ import { NgOptimizedImage } from '@angular/common';
 })
 export class Navbar {
   @Output() searchTermChanged = new EventEmitter<string>();
+  @Output() addClicked = new EventEmitter<void>();
 
   searchTerm: string = '';
 
   emitSearch(value: string) {
     this.searchTerm = value;
     this.searchTermChanged.emit(this.searchTerm);
+  }
+
+  onAddClick() {
+    this.addClicked.emit();
   }
 
   protected readonly input = input;

@@ -32,6 +32,16 @@ export class ContactTable implements OnInit {
     }
   }
 
+  loadContacts() {
+    this.contactService.getAllContacts().subscribe({
+      next: (contacts) => {
+        this.contacts = contacts;
+        this.filterContacts();
+      },
+      error: (err) => console.error('Failed to load contacts', err)
+    });
+  }
+
   filterContacts() {
     this.filteredContacts = this.contacts.filter(contact =>
       contact.firstName.toLowerCase().includes(this.searchTerm) ||

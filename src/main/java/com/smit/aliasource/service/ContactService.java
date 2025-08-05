@@ -51,7 +51,7 @@ public class ContactService {
             return false;
         }
 
-        String message = String.format("Added new contact: %1$s (%2$s) %3$s",
+        String message = String.format("Added new contact: %1$s (%3$s) %2$s",
                 contact.getFirstName(), contact.getLastName(), contact.getAlias());
         LOGGER.info(message);
         return true;
@@ -120,7 +120,7 @@ public class ContactService {
 
         try {
             repository.save(contact);
-            String message = String.format("Successfully edited contact: %1$s (%2$s) %3$s",
+            String message = String.format("Successfully edited contact: %1$s (%3$s) %2$s",
                     contact.getFirstName(), contact.getLastName(), contact.getAlias());
             LOGGER.info(message);
         } catch (Exception e) {
