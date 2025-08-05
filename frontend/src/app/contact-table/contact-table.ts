@@ -61,7 +61,7 @@ export class ContactTable implements OnInit {
       this.sortDirection = 'asc';
     }
 
-    this.contacts.sort((a: Contact, b: Contact) => {
+    this.filteredContacts.sort((a: Contact, b: Contact) => {
       const valueA = (a as any)[field]?.toLowerCase() || '';
       const valueB = (b as any)[field]?.toLowerCase() || '';
 
