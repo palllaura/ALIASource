@@ -1,25 +1,22 @@
 .navbar {
+  width: 100%;
   background-color: #0095e9;
-  padding: 1rem;
   display: flex;
   flex-direction: row;
-  margin-bottom: 1rem;
-  width: 100%;
+  margin-bottom: 0.5rem;
 }
 
 .logo {
-  height: 3em;
+  height: 2em;
   width: auto;
-  margin-right: 1em;
+  margin: 1rem;
 }
 
 .add-button {
-  height: 3em;
   background: #0069e0;
-  border-color: #0069e0;
   color: white;
   align-self: end;
-  margin-right: 1em;
+  margin: 1rem 1rem 1rem 0;
 }
 
 .add-button:hover {
@@ -29,14 +26,14 @@
 .search-wrapper {
   display: flex;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   flex-grow: 1;
-  height: 3em;
+  height: 2em;
   align-items: center;
   align-self: end;
   background: rgba(255, 255, 255, 0.9);
-  margin-right: 1em;
+  margin: 1rem;
 }
 
 .search-input {
@@ -44,16 +41,16 @@
   border: none;
   outline: none;
   padding: 0 1em;
-  font-size: 0.9rem;
   color: #0069e0;
   background: none;
 }
 
 .search-button {
   background-color: #0069e0;
+  border-radius: 0 8px 8px 0;
   border: none;
   height: 100%;
-  padding: 0 1em;
+  padding: 0 0.5em;
   display: flex;
   align-items: center;
   justify-content: center;

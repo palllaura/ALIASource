@@ -29,6 +29,12 @@ export class AddContactModal {
     this.contactService.addContact(this.dto).subscribe({
       next: () => {
         this.contactAdded.emit();
+        this.dto = {
+          firstName: '',
+          lastName: '',
+          alias: '',
+          phoneNumber: ''
+        };
       },
       error: (err) => {
         alert('Lisamine ebaõnnestus');
