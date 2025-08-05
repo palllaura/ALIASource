@@ -1,0 +1,14 @@
+<div class="modal" *ngIf="visible">
+  <div class="modal-content">
+    <h3>Lisa uus kontakt</h3>
+    <form (ngSubmit)="submit()" #contactForm="ngForm">
+      <input type="text" class="modal-input" placeholder="Eesnimi" [(ngModel)]="dto.firstName" name="firstName" required />
+      <input type="text" class="modal-input" placeholder="Perenimi" [(ngModel)]="dto.lastName" name="lastName" required />
+      <input type="text" class="modal-input" placeholder="Alias" [(ngModel)]="dto.alias" name="alias" />
+      <input type="text" class="modal-input" placeholder="Telefoninumber" [(ngModel)]="dto.phoneNumber" name="phoneNumber" required />
+
+      <button type="submit" class="save-button">Salvesta</button>
+      <button type="button" class="cancel-button" (click)="close()">Tühista</button>
+    </form>
+  </div>
+</div>
